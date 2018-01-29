@@ -2,6 +2,7 @@ import rethinkdbdash from 'rethinkdbdash';
 import defaultOptions from './default-options';
 import ensureTables from './ensure-tables';
 import watchTable from './watch-table';
+import debounce from 'lodash.debounce';
 import merge from 'lodash.merge';
 
 // Retain a reference to a RethinkDB driver instance
@@ -20,8 +21,12 @@ async function init(listener, extraOptions) {
     throw e;
   }
 
+  const debouncedWatchTable = debounce(watchTable, options.debounce, {
+    maxWait: options.debounce
+  });
+
   options.tables.forEach(tableDetails => {
-    watchTable(r, {
+    debouncedWatchTable(r, {
       listener,
       nextData: options.nextData,
       previousData: options.previousData,

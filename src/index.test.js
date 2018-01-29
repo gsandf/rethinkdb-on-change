@@ -33,8 +33,6 @@ test('runs function when RethinkDB data changes', async t => {
   // Register for change events
   dbOnChange(onChangeFn, { ...options, tables: testTableInfo });
 
-  await delay(1000);
-
   // Insert test data
   await r
     .db(db1)
@@ -47,7 +45,7 @@ test('runs function when RethinkDB data changes', async t => {
     .insert(data[1]);
 
   // Wait for changes to fire
-  await delay(1000);
+  await delay(500);
 
   t.is(numberChanges, data.length);
 });
@@ -81,8 +79,6 @@ test('runs function when RethinkDB data changes with document data if needed', a
     tables: [{ db, table }]
   });
 
-  await delay(1000);
-
   // Insert new test data
   await r
     .db(db)
@@ -91,5 +87,51 @@ test('runs function when RethinkDB data changes with document data if needed', a
     .update(data[1]);
 
   // Wait for changes to fire
-  await delay(1000);
+  await delay(500);
+});
+
+test('debounce changes works with no changefeed data requested', async t => {
+  const dbPrefix = 'debounce_no_data';
+  const table = 'dattabletho';
+  let numberChanges = 0;
+
+  const onChangeFn = changeData => {
+    numberChanges++;
+    t.pass();
+  };
+
+  const testTableInfo = [
+    { db: `${dbPrefix}_1`, table },
+    { db: `${dbPrefix}_2`, table }
+  ];
+
+  // Create tables
+  const [db1, db2] = testTableInfo.map(table => table.db);
+  await r.dbCreate(db1);
+  await r.dbCreate(db2);
+  await r.db(db1).tableCreate(table);
+  await r.db(db2).tableCreate(table);
+
+  // Register for change events
+  dbOnChange(onChangeFn, { ...options, debounce: 5000, tables: testTableInfo });
+
+  await delay(3000);
+
+  // Insert test data
+  await r
+    .db(db1)
+    .table(table)
+    .insert(data[0]);
+
+  await delay(3000);
+
+  await r
+    .db(db2)
+    .table(table)
+    .insert(data[1]);
+
+  // Wait for changes to fire
+  await delay(2000);
+
+  t.is(numberChanges, 1);
 });

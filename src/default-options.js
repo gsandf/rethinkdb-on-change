@@ -1,4 +1,5 @@
 export default {
+  debounce: 0,
   nextData: false,
   previousData: false,
   rethinkdb: {

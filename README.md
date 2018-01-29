@@ -11,6 +11,8 @@ Yes, but we wanted a way of more easily looking for changes on multiple database
 
 Also, this comes with the feature of [debouncing](https://css-tricks.com/debouncing-throttling-explained-examples/) changes so you can run your logic only when needed.
 
+**ℹ️ NOTE:** Right now, debouncing does not return changefeed data; the callback function is called with no arguments. This behavior will change in future versions.
+
 **✨ Features:**
 
 * **Simple:** specifying a connection and a function to run is all that's needed
@@ -50,6 +52,9 @@ function changeFunction({
 }
 
 await dbOnChange(changeFunction, {
+  // (optional) The minimum amount of time (in ms) to delay.  Default is 0.
+  debounce: 0,
+
   // Connection details for the RethinkDB instance to be copied
   // See `rethinkdbdash` (https://github.com/neumino/rethinkdbdash) for all possible options.
   rethinkdb: {

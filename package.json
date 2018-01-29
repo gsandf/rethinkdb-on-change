@@ -52,6 +52,7 @@
     "prettier-eslint-cli": "^4.7.0"
   },
   "dependencies": {
+    "lodash.debounce": "^4.0.8",
     "lodash.merge": "^4.6.0",
     "rethinkdbdash": "^2.3.31",
     "through2": "^2.0.3"
