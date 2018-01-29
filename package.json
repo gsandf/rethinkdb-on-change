@@ -1,0 +1,59 @@
+{
+  "name": "rethinkdb-on-change",
+  "version": "1.0.0",
+  "main": "build/index.js",
+  "repository": "https://github.com/gsandf/rethinkdb-on-change",
+  "author": "Blake Knight <bknight@gsandf.com> (http://blakek.me/)",
+  "license": "MIT",
+  "ava": {
+    "babel": "inherit",
+    "require": ["babel-register"]
+  },
+  "babel": {
+    "presets": [
+      [
+        "env",
+        {
+          "targets": {
+            "node": true
+          }
+        }
+      ],
+      "stage-2"
+    ]
+  },
+  "eslintConfig": {
+    "extends": "gsandf"
+  },
+  "scripts": {
+    "build": "babel src --out-dir build --ignore *.test.js,test-helpers",
+    "container": "docker-compose run app",
+    "coverage": "nyc ava",
+    "coverage:container":
+      "docker-compose build && docker-compose run app yarn coverage; docker-compose down",
+    "dev": "babel-watch --inspect src/index.js",
+    "lint": "eslint ./src",
+    "prepublish": "yarn build",
+    "start": "node .",
+    "test": "ava src/**/*.test.js",
+    "test:container":
+      "docker-compose build && docker-compose run app yarn test -v; docker-compose down"
+  },
+  "devDependencies": {
+    "ava": "^0.25.0",
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-stage-2": "^6.24.1",
+    "eslint": "^4.16.0",
+    "eslint-config-gsandf": "^1.0.0",
+    "nock": "^9.1.6",
+    "nyc": "^11.4.1",
+    "p-retry": "^1.0.0",
+    "prettier-eslint-cli": "^4.7.0"
+  },
+  "dependencies": {
+    "lodash.merge": "^4.6.0",
+    "rethinkdbdash": "^2.3.31",
+    "through2": "^2.0.3"
+  }
+}

@@ -1,0 +1,12 @@
+# Unbuilt source
+src/
+
+# Logs
+logs
+*.log
+npm-debug.log*
+
+# Extra
+.travis.yml
+docker-compose.yml
+Dockerfile
