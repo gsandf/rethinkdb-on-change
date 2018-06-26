@@ -44,7 +44,7 @@
     "babel-cli": "^6.26.0",
     "babel-preset-env": "^1.6.1",
     "babel-preset-stage-2": "^6.24.1",
-    "eslint": "^4.16.0",
+    "eslint": "^5.0.1",
     "eslint-config-gsandf": "^1.0.0",
     "nock": "^9.1.6",
     "nyc": "^11.4.1",
