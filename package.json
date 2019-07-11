@@ -50,7 +50,8 @@
     ]
   },
   "eslintConfig": {
-    "extends": "gsandf"
+    "extends": "gsandf",
+    "parser": "babel-eslint"
   },
   "scripts": {
     "build": "babel src --out-dir build --ignore *.test.js,test-helpers",
@@ -80,6 +81,7 @@
     "@babel/preset-env": "^7.0.0",
     "@babel/register": "^7.4.4",
     "ava": "^2.2.0",
+    "babel-eslint": "^10.0.2",
     "eslint": "^4.16.0",
     "eslint-config-gsandf": "^1.0.1",
     "nock": "^10.0.6",
