@@ -79,7 +79,7 @@
     "@babel/plugin-syntax-import-meta": "^7.8.0",
     "@babel/polyfill": "^7.8.0",
     "@babel/preset-env": "^7.8.0",
-    "@babel/register": "^7.4.4",
+    "@babel/register": "^7.8.0",
     "ava": "^2.2.0",
     "babel-eslint": "^10.0.2",
     "eslint": "^4.16.0",
