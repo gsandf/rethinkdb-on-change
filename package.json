@@ -80,7 +80,7 @@
     "@babel/polyfill": "^7.4.4",
     "@babel/preset-env": "^7.0.0",
     "@babel/register": "^7.4.4",
-    "ava": "^2.2.0",
+    "ava": "^3.0.0",
     "babel-eslint": "^10.0.2",
     "eslint": "^4.16.0",
     "eslint-config-gsandf": "^1.0.1",
